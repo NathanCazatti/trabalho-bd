@@ -1,0 +1,34 @@
+
+INSERT INTO generos (nome, descricao) VALUES
+('Ficção Científica', 'Histórias baseadas em ciência e tecnologia futurista'),
+('Romance', 'Narrativas centradas em relacionamentos amorosos'),
+('Mistério', 'Histórias com enigmas e investigações');
+
+
+INSERT INTO autores (nome, nacionalidade, data_nascimento) VALUES
+('Isaac Asimov', 'Americano', '1920-01-02'),
+('Jane Austen', 'Britânica', '1775-12-16'),
+('Agatha Christie', 'Britânica', '1890-09-15');
+
+
+INSERT INTO livros (titulo, id_autor, id_genero, isbn, ano_publicacao, quantidade_disponivel) VALUES
+('Fundação', 1, 1, '9780553293357', 1951, 3),
+('Orgulho e Preconceito', 2, 2, '9780141439518', 1813, 5),
+('O Assassinato de Roger Ackroyd', 3, 3, '9788576573065', 1926, 2);
+
+
+INSERT INTO usuarios (nome, email, telefone) VALUES
+('Ana Silva', 'ana@email.com', '11987654321'),
+('Carlos Souza', 'carlos@email.com', '21987654322'),
+('Mariana Lima', 'mariana@email.com', '31987654323');
+
+
+INSERT INTO funcionarios (nome, cargo, data_contratacao) VALUES
+('Roberto Alves', 'Bibliotecário', '2020-03-15'),
+('Fernanda Costa', 'Assistente', '2022-07-20');
+
+
+INSERT INTO emprestimos (id_livro, id_usuario, id_funcionario, data_devolucao_prevista) VALUES
+(1, 1, 1, '2025-04-10'),
+(2, 2, 1, '2025-04-12'),
+(3, 3, 2, '2025-04-15');

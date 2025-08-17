@@ -1,0 +1,64 @@
+
+CREATE DATABASE IF NOT EXISTS biblioteca;
+USE biblioteca;
+
+
+CREATE TABLE autores (
+  id_autor INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  nacionalidade VARCHAR(50),
+  data_nascimento DATE
+);
+
+
+CREATE TABLE generos (
+  id_genero INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(50) NOT NULL UNIQUE,
+  descricao TEXT
+);
+
+
+CREATE TABLE livros (
+  id_livro INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(200) NOT NULL,
+  id_autor INT,
+  id_genero INT,
+  isbn VARCHAR(13) UNIQUE,
+  ano_publicacao YEAR,
+  quantidade_disponivel INT DEFAULT 1,
+  FOREIGN KEY (id_autor) REFERENCES autores(id_autor) ON DELETE SET NULL,
+  FOREIGN KEY (id_genero) REFERENCES generos(id_genero) ON DELETE SET NULL
+);
+
+
+CREATE TABLE usuarios (
+  id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  telefone VARCHAR(15),
+  data_cadastro DATE DEFAULT (CURRENT_DATE),
+  ativo BOOLEAN DEFAULT TRUE
+);
+
+
+CREATE TABLE funcionarios (
+  id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  cargo VARCHAR(50),
+  data_contratacao DATE
+);
+
+
+CREATE TABLE emprestimos (
+  id_emprestimo INT AUTO_INCREMENT PRIMARY KEY,
+  id_livro INT,
+  id_usuario INT,
+  id_funcionario INT,
+  data_emprestimo DATE DEFAULT (CURRENT_DATE),
+  data_devolucao_prevista DATE NOT NULL,
+  data_devolucao_real DATE,
+  status ENUM('ativo', 'devolvido', 'atrasado') DEFAULT 'ativo',
+  FOREIGN KEY (id_livro) REFERENCES livros(id_livro) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+  FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario) ON DELETE SET NULL
+);
